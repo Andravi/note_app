@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
             IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
           ],
         ),
-        Center(
+        Expanded(
           child: GridView.builder(
             shrinkWrap: true,
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -150,7 +150,9 @@ class _MyHomePageState extends State<MyHomePage> {
               context,
               MaterialPageRoute(
                 builder: (context) => const NewNotePage(),
-              ));
+              )).then((value) {
+            setState(() {});
+          });
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

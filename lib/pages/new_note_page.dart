@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Model/note_model.dart';
+import 'package:flutter_application_1/Repositories/note_repository.dart';
 
 class NewNotePage extends StatefulWidget {
   const NewNotePage({Key? key}) : super(key: key);
@@ -63,6 +65,18 @@ class _NewNotePageState extends State<NewNotePage> {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            NotasRepository.notas.add(Note(titulo: tituloController.text, corpo: corpoController.text, data: data, cor: 'azul'));
+            Navigator.pop(context);
+            setState(() {
+              
+            });
+          });
+        },
+        child: const Icon(Icons.save),
       ),
     );
   }
