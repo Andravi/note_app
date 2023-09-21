@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Model/note_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,7 +42,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late List notas;
+  late List<Note> notas;
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+        backgroundColor: Colors.amber,
         title: Center(
           child: Text(
             widget.title,
@@ -67,17 +63,75 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      body: const Center(
-        child: Column(
+      body: Column(children: [
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Mi camera de gás é perfeita!!!',
-              style: TextStyle(fontSize: 30),
+          children: [
+            SizedBox(
+              width: 200,
+              height: 30,
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Pesquise sua nota...',
+                  prefixIcon: Icon(Icons.search),
+                ),
+              ),
             ),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
           ],
         ),
-      ),
+        Center(
+          child: GridView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            itemCount: 4,
+            itemBuilder: (ctx, i) {
+              return Card(
+                child: Container(
+                  height: 290,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  margin: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
+                  child: const Stack(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            'Title',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Data',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Expanded(child: Text('Colocar texto da nota aqui')),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              // childAspectRatio: 1.0,
+              mainAxisSpacing: 5,
+              mainAxisExtent: 264,
+            ),
+          ),
+        ),
+      ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         tooltip: 'Increment',
