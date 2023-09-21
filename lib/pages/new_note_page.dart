@@ -9,6 +9,13 @@ class NewNotePage extends StatefulWidget {
 }
 
 class _NewNotePageState extends State<NewNotePage> {
+  late String titulo;
+  late String corpo;
+  String data = 'Data e Hora de Agora';
+
+  TextEditingController tituloController = TextEditingController();
+  TextEditingController corpoController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,10 +26,43 @@ class _NewNotePageState extends State<NewNotePage> {
           style: TextStyle(fontSize: 35),
         ),
       ),
-      body: const Column(
-        children: [
-          
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFormField(
+              controller: tituloController,
+              decoration: const InputDecoration(
+                hintText: 'Adicionar Titulo...',
+              ),
+            ),
+            Text(
+              data,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black54,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: TextField(
+                  controller: corpoController,
+                  maxLines: null,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: null,
+                  style: const TextStyle(
+                    fontSize: 19,
+                    height: 1.5,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
