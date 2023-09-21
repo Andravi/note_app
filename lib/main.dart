@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Model/note_model.dart';
+import 'package:flutter_application_1/Repositories/note_repository.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,7 +43,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late List<Note> notas;
+  List<Note> notas = NotasRepository.notas;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: GridView.builder(
             shrinkWrap: true,
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            itemCount: 4,
+            itemCount: notas.length,
             itemBuilder: (ctx, i) {
               return Card(
                 child: Container(
@@ -92,14 +93,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
                   margin: const EdgeInsets.all(5),
                   padding: const EdgeInsets.all(5),
-                  child: const Stack(
+                  child: Stack(
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
-                            'Title',
-                            style: TextStyle(
+                            notas[i].titulo,
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -107,15 +108,15 @@ class _MyHomePageState extends State<MyHomePage> {
                           Row(
                             children: [
                               Text(
-                                'Data',
-                                style: TextStyle(
+                                notas[i].data,
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                 ),
                               ),
                             ],
                           ),
-                          Expanded(child: Text('Colocar texto da nota aqui')),
+                          Expanded(child: Text(notas[i].corpo)),
                         ],
                       ),
                     ],
@@ -133,7 +134,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ]),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {});
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
