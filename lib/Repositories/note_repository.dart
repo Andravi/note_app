@@ -8,5 +8,6 @@ class NotasRepository {
       data: 'hoje',
       cor: 'rosa',
     ),
+    
   ];
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Model/note_model.dart';
 import 'package:flutter_application_1/Repositories/note_repository.dart';
+import 'package:flutter_application_1/pages/new_note_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -135,7 +136,21 @@ class _MyHomePageState extends State<MyHomePage> {
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {});
+          // setState(() {
+          //   notas.add(
+          //     Note(
+          //       titulo: 'Segunda nota',
+          //       corpo: 'Se tudo deu cert deve ter algo aqui',
+          //       data: 'Agora',
+          //       cor: 'rosa',
+          //     ),
+          //   );
+          // });
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const NewNotePage(),
+              ));
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
